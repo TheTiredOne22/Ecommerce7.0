@@ -19,17 +19,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-<<<<<<< HEAD
 SECRET_KEY = 'django-insecure-#-yhq#%1x&f@3gpsp!dgfg5snr5cpiuk+e)8+ze@q&j_z^cvd^'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-=======
 SECRET_KEY = 'at-nxjad^sii%7bp=*+jjwxcnw@!3s0^ylj_us4kz4!)hw3pa0'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
->>>>>>> Initial commit
 
 ALLOWED_HOSTS = []
 
@@ -167,8 +164,6 @@ SITE_ID = 1
 # Initialise environment variables
 env = environ.Env()
 environ.Env.read_env()
-<<<<<<< HEAD
-=======
 
 # deployment settings
 SECURE_HSTS_SECONDS = 31536000
@@ -177,4 +172,3 @@ SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 SECURE_HSTS_PRELOAD = True
->>>>>>> Initial commit
