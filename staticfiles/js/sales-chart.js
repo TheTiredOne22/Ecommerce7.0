@@ -1,5 +1,3 @@
-var sales = {{ sales|safe }}
-
 const getMainChartOptions = () => {
 	let mainChartColors = {}
 
@@ -58,7 +56,7 @@ const getMainChartOptions = () => {
 		series: [
 			{
 				name: 'Sales',
-				data: [6356, 6218, 6156, 6526, 6356, 6256, 6056],
+				data: salesData,
 				color: '#1A56DB'
 			},
 			{

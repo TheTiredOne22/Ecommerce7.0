@@ -22,9 +22,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '5-1-6z_+%g05)thbkh@eoy)ei0qb@zegcbx#!y04)-3^wajv^e'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-SECRET_KEY = 'at-nxjad^sii%7bp=*+jjwxcnw@!3s0^ylj_us4kz4!)hw3pa0'
-
-# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
 ALLOWED_HOSTS = ['.vercel.app']
@@ -44,6 +41,7 @@ INSTALLED_APPS = [
     'coupon',
     'orders',
     # 'analytics',
+    'whitenoise',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
@@ -58,6 +56,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'allauth.account.middleware.AccountMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware'
 ]
 
 ROOT_URLCONF = 'configurations.urls'
@@ -126,7 +125,7 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [BASE_DIR / "static"]
 STATIC_ROOT = BASE_DIR / "staticfiles"
-STATICFILES_STORAGE = "django.contrib.staticfiles.storage.StaticFilesStorage"
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / 'media'
