@@ -1,0 +1,227 @@
+{% include 'admin_panel/base.html' %}
+<body class="bg-gray-50 dark:bg-gray-800">
+
+{% include 'admin_panel/partials/nav.html' %}
+<div class="flex pt-16 overflow-hidden bg-gray-50 dark:bg-gray-900">
+
+    {% include 'admin_panel/partials/sidebar.html' %}
+    <div class="fixed inset-0 z-10 hidden bg-gray-900/50 dark:bg-gray-900/90" id="sidebarBackdrop"></div>
+    {% block content %}
+    <div id="main-content" class="relative w-full h-full overflow-y-auto bg-gray-50 lg:ml-64 dark:bg-gray-900">
+        <main>
+            <div class="p-4 bg-white block sm:flex items-center justify-between border-b border-gray-200 lg:mt-1.5 dark:bg-gray-800 dark:border-gray-700">
+                <div class="w-full mb-1">
+                    <div class="mb-4">
+                        <nav class="flex mb-5" aria-label="Breadcrumb">
+                            <ol class="inline-flex items-center space-x-1 text-sm font-medium md:space-x-2">
+                                <li class="inline-flex items-center">
+                                    <a href="#"
+                                       class="inline-flex items-center text-gray-700 hover:text-primary-600 dark:text-gray-300 dark:hover:text-white">
+                                        <svg class="w-5 h-5 mr-2.5" fill="currentColor" viewBox="0 0 20 20"
+                                             xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
+                                        </svg>
+                                        Home
+                                    </a>
+                                </li>
+                                <li>
+                                    <div class="flex items-center">
+                                        <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20"
+                                             xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd"
+                                                  d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                                  clip-rule="evenodd"></path>
+                                        </svg>
+                                        <a href="#"
+                                           class="ml-1 text-gray-700 hover:text-primary-600 md:ml-2 dark:text-gray-300 dark:hover:text-white">E-commerce</a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="flex items-center">
+                                        <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20"
+                                             xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd"
+                                                  d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                                  clip-rule="evenodd"></path>
+                                        </svg>
+                                        <span class="ml-1 text-gray-400 md:ml-2 dark:text-gray-500" aria-current="page">Products</span>
+                                    </div>
+                                </li>
+                            </ol>
+                        </nav>
+                    </div>
+
+                </div>
+
+
+            </div>
+        </main>
+        <!-- Start block -->
+
+        <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
+
+            <div class="p-4">
+                <div class="flex-1 flex items-center space-x-2">
+                    <h5>
+                        <span class="text-gray-500">All Products:</span>
+                        <span class="dark:text-white">{{ product_count }}</span>
+                    </h5>
+                    <h5 class="text-gray-500 dark:text-gray-400 ml-1">{{ start_range }}-{{ end_range }}
+                        ({{ product_count }})</h5>
+                    <button type="button" class="group" data-tooltip-target="results-tooltip">
+                        <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                             class="h-4 w-4 text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                             viewbox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd"
+                                  d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                                  clip-rule="evenodd"/>
+                        </svg>
+                        <span class="sr-only">More info</span>
+                    </button>
+                    <div id="results-tooltip" role="tooltip"
+                         class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                        Showing {{ start_range }}-{{ end_range }} of {{ product_count }} results
+                        <div class="tooltip-arrow" data-popper-arrow=""></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-4 bg-white block sm:flex items-center justify-between border-b border-gray-200 lg:mt-1.5 dark:bg-gray-800 dark:border-gray-700">
+                <div class="w-full mb-1">
+                    <div class="items-center block sm:flex md:divide-x md:divide-gray-100 dark:divide-gray-700">
+                        <form class="mb-4 sm:pr-3 sm:mb-0">
+                            <label for="simple-search" class="sr-only">Search</label>
+                            <div class="relative mt-1 sm:w-64 xl:w-96">
+                                <input type="text" hx-get="{% url 'admin_panel:search' %}"
+                                       hx-trigger="input changed delay:500ms, search"
+                                       hx-target="#table-results" type="text" id="simple-search"
+                                       name="q"
+                                       placeholder="Search for products" required=""
+                                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                            </div>
+                        </form>
+                        <div class="flex items-center w-full sm:justify-end">
+                            <div class="mr-4 hidden pl-2 space-x-1 md:flex">
+                            </div>
+                            <button type="button" data-modal-toggle="createProductModal"
+                                    class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-primary-700 rounded-lg hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 sm:ml-auto dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                                <svg class="w-6 h-6 mr-2 -ml-1" fill="currentColor" viewBox="0 0 20 20"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                          d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
+                                          clip-rule="evenodd"></path>
+                                </svg>
+                                Add product
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="overflow-x-auto">
+                <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                    <tr>
+                        <th scope="col" class="p-4">
+
+                        </th>
+                        <th scope="col" class="p-4">Product</th>
+                        <th scope="col" class="p-4">Category</th>
+                        <th scope="col" class="p-4">Brand</th>
+                        <th scope="col" class="p-4">Stock</th>
+                        <th scope="col" class="p-4">Sales/Day</th>
+                        <th scope="col" class="p-4">Sales/Month</th>
+                        <th scope="col" class="p-4">Sales</th>
+                        <th scope="col" class="p-4">Revenue</th>
+                        <th scope="col" class="p-4">Last Update</th>
+                    </tr>
+                    </thead>
+
+                    <tbody id="table-results">
+                    {% include 'admin_panel/partials/products/table-results.html' %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="sticky bottom-0 right-0 items-center w-full p-4 bg-white border-t border-gray-200 sm:flex sm:justify-between dark:bg-gray-800 dark:border-gray-700">
+                <div class="flex items-center mb-4 mt-4 sm:mb-0">
+                    {% if current_page.has_previous %}
+                    <a href="?page={{ current_page.previous_page_number }}"
+                       class="inline-flex justify-center p-1 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
+                        <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                  d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+                                  clip-rule="evenodd"></path>
+                        </svg>
+                    </a>
+                    {% endif %}
+                    {% if current_page.has_next %}
+                    <a href="?page={{ current_page.next_page_number }}"
+                       class="inline-flex justify-center p-1 mr-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
+                        <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                  d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                  clip-rule="evenodd"></path>
+                        </svg>
+                    </a>
+                    {% endif %}
+                    <span class="text-sm font-normal text-gray-500 dark:text-gray-400">
+            Showing <span class="font-semibold text-gray-900 dark:text-white">{{ start_range }}-{{ end_range }}</span>
+            of <span class="font-semibold text-gray-900 dark:text-white">{{ product_count }}</span>
+        </span>
+                </div>
+                <div class="flex items-center space-x-3">
+                    {% if current_page.has_previous %}
+                    <a href="?page={{ current_page.previous_page_number }}"
+                       class="inline-flex items-center justify-center flex-1 px-3 py-2 text-sm font-medium text-center text-white bg-primary-700 rounded-lg hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                        <svg class="w-5 h-5 mr-1 -ml-1" fill="currentColor" viewBox="0 0 20 20"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                  d="M12.707 5.293a1 1 0 010-1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+                                  clip-rule="evenodd"></path>
+                        </svg>
+                        Previous
+                    </a>
+                    {% endif %}
+                    {% if current_page.has_next %}
+                    <a href="?page={{ current_page.next_page_number }}"
+                       class="inline-flex items-center justify-center flex-1 px-3 py-2 text-sm font-medium text-center text-white bg-primary-700 rounded-lg hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                        Next
+                        <svg class="w-5 h-5 ml-1 -mr-1" fill="currentColor" viewBox="0 0 20 20"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                  d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                  clip-rule="evenodd"></path>
+                        </svg>
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+
+
+        </div>
+
+        <!-- End block -->
+        {% include 'admin_panel/partials/products/create-product.html' %}
+        <!-- drawer component -->
+        {% for product in products %}
+        {% include 'admin_panel/partials/products/update.html' %}
+        {% endfor %}
+
+        {% include 'admin_panel/partials/products/preview.html' %}
+
+        <!-- Delete Modal -->
+        {% include 'admin_panel/partials/products/delete.html' %}
+
+        {% endblock %}
+
+    </div>
+
+
+</div>
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+<script src="https://flowbite-admin-dashboard.vercel.app/app.bundle.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.2/datepicker.min.js"></script>
+
+
+</body>

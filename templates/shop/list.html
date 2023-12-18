@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% include 'base.html' %}
+{% include 'shop/partials/navbar.html' %}
+{% load static %}
+
+
+<div id="messages">
+    {% include 'cart/messages/product_added.html' %}
+</div>
+
+
+<section class="bg-white dark:bg-gray-900">
+    <div class="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16 lg:px-12">
+        <a href="#"
+           class="inline-flex justify-between items-center py-1 px-1 pr-4 mb-7 text-sm text-gray-700 bg-gray-100 rounded-full dark:bg-gray-800 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700"
+           role="alert">
+            <span class="text-xs bg-blue-600 rounded-full text-white px-4 py-1.5 mr-3">New</span> <span
+                class="text-sm font-medium">Welcome to E-shop! See what's new</span>
+            <svg class="ml-2 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd"
+                      d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                      clip-rule="evenodd"></path>
+            </svg>
+        </a>
+        <h1 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
+            Discover the latest and greatest in technology</h1>
+        <p class="mb-8 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">Explore a
+            world of cutting-edge innovations and stay ahead with our curated selection of the latest and greatest in
+            technology. From state-of-the-art gadgets to futuristic devices, we bring you a comprehensive range that
+            defines the pinnacle of technological advancement.
+        </p>
+
+
+    </div>
+    <div class="max-w-screen-xl px-4 mx-auto lg:px-12 w-full">
+        <!-- Start coding here -->
+        <div class="relative bg-white shadow-md dark:bg-gray-800 sm:rounded-lg">
+
+
+            <div class="flex flex-col items-center justify-between p-4 space-y-3 md:flex-row md:space-y-0 md:space-x-4">
+                <div class="w-full md:w-1/2">
+
+                    <div class="flex items-center">
+                        {% csrf_token %}
+                        <label for="simple-search" class="sr-only">Search</label>
+                        <div class="relative w-full">
+                            <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                                <svg class="w-4 h-4 text-gray-800 dark:text-white" aria-hidden="true"
+                                     xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M18 5h-.7c.229-.467.349-.98.351-1.5a3.5 3.5 0 0 0-3.5-3.5c-1.717 0-3.215 1.2-4.331 2.481C8.4.842 6.949 0 5.5 0A3.5 3.5 0 0 0 2 3.5c.003.52.123 1.033.351 1.5H2a2 2 0 0 0-2 2v3a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1V7a2 2 0 0 0-2-2ZM8.058 5H5.5a1.5 1.5 0 0 1 0-3c.9 0 2 .754 3.092 2.122-.219.337-.392.635-.534.878Zm6.1 0h-3.742c.933-1.368 2.371-3 3.739-3a1.5 1.5 0 0 1 0 3h.003ZM11 13H9v7h2v-7Zm-4 0H2v5a2 2 0 0 0 2 2h3v-7Zm6 0v7h3a2 2 0 0 0 2-2v-5h-5Z"/>
+                                </svg>
+                            </div>
+                            <input type="text" hx-get="{% url 'shop:search' %}"
+                                   hx-trigger="input changed delay:500ms, search"
+                                   hx-target="#search-results-container" type="text" id="simple-search"
+                                   name="q"
+                                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                   placeholder="Search products..." required>
+                        </div>
+                        <button type="submit"
+                                class="p-2.5 ml-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                            <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                 viewBox="0 0 20 20">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                      stroke-width="2"
+                                      d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+                            </svg>
+                            <span class="sr-only">Search</span>
+                        </button>
+                    </div>
+
+                </div>
+                <div class="flex flex-col items-stretch justify-end flex-shrink-0 w-full space-y-2 md:w-auto md:flex-row md:space-y-0 md:items-center md:space-x-3">
+                    <div class="flex items-center w-full space-x-3 md:w-auto">
+
+                        <button id="SortDropdownButton" data-dropdown-toggle="SortDropdown"
+                                class="flex items-center justify-center w-full px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg md:w-auto focus:outline-none hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+                                type="button">
+                            <svg class="w-4 h-4 mr-2 text-gray-400" aria-hidden="true"
+                                 xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M8.574 11.024h6.852a2.075 2.075 0 0 0 1.847-1.086 1.9 1.9 0 0 0-.11-1.986L13.736 2.9a2.122 2.122 0 0 0-3.472 0L6.837 7.952a1.9 1.9 0 0 0-.11 1.986 2.074 2.074 0 0 0 1.847 1.086Zm6.852 1.952H8.574a2.072 2.072 0 0 0-1.847 1.087 1.9 1.9 0 0 0 .11 1.985l3.426 5.05a2.123 2.123 0 0 0 3.472 0l3.427-5.05a1.9 1.9 0 0 0 .11-1.985 2.074 2.074 0 0 0-1.846-1.087Z"/>
+                            </svg>
+                            Sort By
+                            <svg class="-mr-1 ml-1.5 w-5 h-5" fill="currentColor" viewbox="0 0 20 20"
+                                 xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <path clip-rule="evenodd" fill-rule="evenodd"
+                                      d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/>
+                            </svg>
+                        </button>
+                        <!-- Dropdown menu -->
+                        <div id="SortDropdown"
+                             class="z-10 hidden w-48 p-4 bg-white rounded-lg shadow dark:bg-gray-700">
+                            <h6 class="mb-3 text-sm font-medium text-gray-900 dark:text-white">
+                                Price
+                            </h6>
+                            <ul class="space-y-2 text-sm" aria-labelledby="dropdownDefault">
+                                <li class="flex items-center">
+
+                                    <input id="lowest" type="checkbox" value="lowest"
+                                           class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"/>
+                                    <label for="lowest"
+                                           class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
+                                        Lowest to highest
+                                    </label>
+
+                                </li>
+                                <li class="flex items-center">
+
+                                    <input id="highest" type="checkbox" value="highest"
+                                           class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"/>
+                                    <label for="highest"
+                                           class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
+                                        Highest to lowest
+                                    </label>
+                                </li>
+
+                            </ul>
+                        </div>
+                        <button id="filterDropdownButton" data-dropdown-toggle="filterDropdown"
+                                class="flex items-center justify-center w-full px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg md:w-auto focus:outline-none hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+                                type="button">
+                            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
+                                 class="w-4 h-4 mr-2 text-gray-400" viewbox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd"
+                                      d="M3 3a1 1 0 011-1h12a1 1 0 011 1v3a1 1 0 01-.293.707L12 11.414V15a1 1 0 01-.293.707l-2 2A1 1 0 018 17v-5.586L3.293 6.707A1 1 0 013 6V3z"
+                                      clip-rule="evenodd"/>
+                            </svg>
+                            Filter
+                            <svg class="-mr-1 ml-1.5 w-5 h-5" fill="currentColor" viewbox="0 0 20 20"
+                                 xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <path clip-rule="evenodd" fill-rule="evenodd"
+                                      d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/>
+                            </svg>
+                        </button>
+                        <!-- Dropdown menu -->
+                        <div id="filterDropdown"
+                             class="z-10 hidden w-48 p-4 bg-white rounded-lg shadow dark:bg-gray-700">
+                            <h6 class="mb-3 text-sm font-medium text-gray-900 dark:text-white">
+                                Category
+                            </h6>
+                            <form method="get"
+                                  action="">
+                                <ul class="space-y-2 text-sm" aria-labelledby="dropdownDefault">
+                                    <li class="flex items-center">
+                                        <input id="all" type="checkbox" value=""
+                                               onchange="handleCheckboxChange(this, '{{ category.slug }}')"
+                                               class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600
+                                        focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700
+                                        focus:ring-2 dark:bg-gray-600 dark:border-gray-500"/>
+                                        <label for="all"
+                                               class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
+                                            All
+                                        </label>
+                                    </li>
+
+                                    {% for category in categories %}
+
+                                    <li class="flex items-center">
+                                        <input id="{{ category.slug }}" type="checkbox" value="{{ category.slug }}"
+                                               onchange="handleCheckboxChange(this, '{{ category.slug }}')"
+                                               class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600
+                                        focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700
+                                        focus:ring-2 dark:bg-gray-600 dark:border-gray-500"/>
+                                        <label for="{{ category.slug }}"
+                                               class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
+                                            {{ category.name }}
+                                        </label>
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+
+        <div class="flex flex-row items-center p-4 space-y-3 md:flex-row md:space-y-0 md:space-x-4"
+             id="search-results-container">
+            {% include 'shop/partials/search_results.html' %}
+        </div>
+
+
+    </div>
+
+
+    <section>
+        {% include 'shop/partials/pagination.html' %}
+    </section>
+</section>
+
+<script>
+    const lowestCheckbox = document.getElementById('lowest');
+const highestCheckbox = document.getElementById('highest');
+
+lowestCheckbox.addEventListener('change', () => {
+  if (lowestCheckbox.checked) {
+    window.location.href = `${window.location.pathname}?sort_by=lowest`;
+  }
+});
+
+highestCheckbox.addEventListener('change', () => {
+  if (highestCheckbox.checked) {
+    window.location.href = `${window.location.pathname}?sort_by=highest`;
+  }
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+<script>
+  function handleCheckboxChange(checkbox, categorySlug) {
+    if (checkbox.checked) {
+      window.location.href = `/${categorySlug}`;
+    }
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+
+</body>
+{% include 'footer.html' %}
+
+</html>

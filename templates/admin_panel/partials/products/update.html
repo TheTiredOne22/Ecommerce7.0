@@ -1,0 +1,281 @@
+<!--<form method="POST" action="{% url 'admin_panel:update_product' product_id=product.id %}"-->
+<!--      id="drawer-update-product-{{ product.id }}" enctype="multipart/form-data"-->
+<!--      class="fixed top-0 left-0 z-40 w-full h-screen max-w-3xl p-4 overflow-y-auto transition-transform -translate-x-full bg-white dark:bg-gray-800"-->
+<!--      tabindex="-1" aria-labelledby="drawer-update-product-label" aria-hidden="true">-->
+<!--    {% csrf_token %}-->
+<!--    <h5 id="drawer-label"-->
+<!--        class="inline-flex items-center mb-6 text-sm font-semibold text-gray-500 uppercase dark:text-gray-400">-->
+<!--        New-->
+<!--        Product</h5>-->
+<!--    <button type="button" data-drawer-dismiss="drawer-update-product-{{ product.id }}"-->
+<!--            aria-controls="drawer-update-product-{{ product.id }}"-->
+<!--            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 absolute top-2.5 right-2.5 inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white">-->
+<!--        <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewbox="0 0 20 20"-->
+<!--             xmlns="http://www.w3.org/2000/svg">-->
+<!--            <path fill-rule="evenodd"-->
+<!--                  d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"-->
+<!--                  clip-rule="evenodd"/>-->
+<!--        </svg>-->
+<!--        <span class="sr-only">Close menu</span>-->
+<!--    </button>-->
+
+
+<!--    <div class="grid gap-4 sm:grid-cols-3 sm:gap-6 ">-->
+<!--        <div class="space-y-4 sm:col-span-2 sm:space-y-6">-->
+<!--            <div>-->
+<!--                <label for="product_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Product-->
+<!--                    Name</label>-->
+<!--                <input type="text" name="product_name" id="product_name"-->
+<!--                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"-->
+<!--                       value="{{ product.product_name }}" placeholder="Type product name" required="">-->
+<!--            </div>-->
+<!--            <div>-->
+<!--                <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>-->
+<!--                <div class="w-full border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600">-->
+<!--                    <div class="px-4 py-3 bg-white rounded-b-lg dark:bg-gray-800">-->
+<!--                        <textarea id="description" name="description" rows="8"-->
+<!--                                  class="block w-full px-0 text-sm text-gray-800 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400"-->
+<!--                                  placeholder="Write product description here"-->
+<!--                                  required="">{{ product.description }}</textarea>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="mb-4">-->
+<!--                <span class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Product Images</span>-->
+<!--                <div class="grid grid-cols-3 gap-4 mb-4">-->
+<!--                    <div class="relative p-2 bg-gray-100 rounded-lg sm:w-36 sm:h-36 dark:bg-gray-700">-->
+<!--                        <img src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-side-image.png"-->
+<!--                             alt="imac image">-->
+<!--                        <button type="button"-->
+<!--                                class="absolute text-red-600 dark:text-red-500 hover:text-red-500 dark:hover:text-red-400 bottom-1 left-1">-->
+<!--                            <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewbox="0 0 20 20"-->
+<!--                                 xmlns="http://www.w3.org/2000/svg">-->
+<!--                                <path fill-rule="evenodd"-->
+<!--                                      d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"-->
+<!--                                      clip-rule="evenodd"/>-->
+<!--                            </svg>-->
+<!--                            <span class="sr-only">Remove image</span>-->
+<!--                        </button>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="flex items-center justify-center w-full">-->
+<!--                    <label for="product_image"-->
+<!--                           class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">-->
+<!--                        <div class="flex flex-col items-center justify-center pt-5 pb-6">-->
+<!--                            <svg aria-hidden="true" class="w-10 h-10 mb-3 text-gray-400" fill="none"-->
+<!--                                 stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">-->
+<!--                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"-->
+<!--                                      d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>-->
+<!--                            </svg>-->
+<!--                            <p class="mb-2 text-sm text-gray-500 dark:text-gray-400">-->
+<!--                                <span class="font-semibold">Click to upload</span>-->
+<!--                                or drag and drop-->
+<!--                            </p>-->
+<!--                            <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX.-->
+<!--                                800x400px)</p>-->
+<!--                        </div>-->
+<!--                        <input id="product_image" name="product_image" type="file" class="hidden">-->
+<!--                    </label>-->
+<!--                </div>-->
+<!--            </div>-->
+
+<!--        </div>-->
+<!--        <div class="space-y-4 sm:space-y-6">-->
+<!--            <div>-->
+<!--                <label for="brand"-->
+<!--                       class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Brand</label>-->
+<!--                <input type="text" id="brand" name="brand"-->
+<!--                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"-->
+<!--                       value="{{ product.brand }}" placeholder="Product Brand" required="">-->
+<!--            </div>-->
+<!--            <div><label for="category"-->
+<!--                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category</label><select-->
+<!--                    name="category" id="category"-->
+<!--                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">-->
+<!--                {% for category in categories %}-->
+<!--                <option value="{{ category.id }}">{{ category.name }}</option>-->
+<!--                {% endfor %}-->
+<!--            </select></div>-->
+<!--            <div>-->
+<!--                <label for="price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Item-->
+<!--                    Price ($)</label>-->
+<!--                <input type="number" name="price" id="price"-->
+<!--                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"-->
+<!--                       value="{{ product.price }}" placeholder="Ex. 12" required="">-->
+<!--            </div>-->
+<!--            <div>-->
+<!--                <label for="quantity"-->
+<!--                       class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Quantity</label>-->
+<!--                <input type="number" name="quantity" id="quantity"-->
+<!--                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"-->
+<!--                       value="{{ product.quantity }}" placeholder="Ex. 105" required="">-->
+<!--            </div>-->
+<!--            <div class="flex items-center">-->
+<!--                <input {% if product.is_available %}checked{% endif %} id="checked-checkbox" type="checkbox"-->
+<!--                       name="is_available" value="on"-->
+<!--                       class="mr-4 w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">-->
+<!--                <label for="checked-checkbox" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Is this-->
+<!--                    product available?</label>-->
+<!--            </div>-->
+
+<!--        </div>-->
+<!--    </div>-->
+
+
+<!--    <div class="grid grid-cols-2 gap-4 mt-6 sm:w-1/2">-->
+<!--        <button type="submit"-->
+<!--                class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">-->
+<!--            Update product-->
+<!--        </button>-->
+<!--        <button type="button"-->
+<!--                class="text-red-600 inline-flex justify-center items-center hover:text-white border border-red-600 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">-->
+<!--            <svg aria-hidden="true" class="w-5 h-5 mr-1 -ml-1" fill="currentColor" viewbox="0 0 20 20"-->
+<!--                 xmlns="http://www.w3.org/2000/svg">-->
+<!--                <path fill-rule="evenodd"-->
+<!--                      d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"-->
+<!--                      clip-rule="evenodd"/>-->
+<!--            </svg>-->
+<!--            Delete-->
+<!--        </button>-->
+<!--    </div>-->
+
+<!--</form>-->
+
+<div class="fixed left-0 right-0 z-50 items-center justify-center hidden overflow-x-hidden overflow-y-auto top-4 md:inset-0 h-modal sm:h-full"
+     id="update-product-{{ product.id }}">
+    <div class="relative w-full h-full max-w-2xl px-4 md:h-auto">
+        <!-- Modal content -->
+        <div class="relative bg-white rounded-lg shadow dark:bg-gray-800">
+            <!-- Modal header -->
+            <div class="flex items-start justify-between p-5 border-b rounded-t dark:border-gray-700">
+                <h3 class="text-xl font-semibold dark:text-white">
+                    Edit product
+                </h3>
+                <button type="button"
+                        class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-700"
+                        data-modal-toggle="update-product-{{ product.id }}">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+                              d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                              clip-rule="evenodd"></path>
+                    </svg>
+                </button>
+            </div>
+            <!-- Modal body -->
+            <div class="p-6 space-y-6">
+                <form method="POST" action="{% url 'admin_panel:update_product' product_id=product.id %}"
+                      enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="grid grid-cols-6 gap-6">
+                        <div class="col-span-6 sm:col-span-3">
+                            <label for="product_name"
+                                   class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Product
+                                Name</label>
+                            <input type="text" name="product_name" id="product_name"
+                                   class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                   value="{{ product.product_name }}" required>
+                        </div>
+                        <div class="col-span-6 sm:col-span-3">
+                            <label for="category"
+                                   class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category</label><select
+                                id="category" name="category"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                            {% for category in categories %}
+                            <option value="{{ category.id }}">{{ category.name }}</option>
+                            {% endfor %}
+                        </select>
+                        </div>
+                        <div class="col-span-6 sm:col-span-3">
+                            <label for="brand"
+                                   class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Brand</label>
+                            <input type="text" name="brand" id="brand"
+                                   class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                   value="{{ product.brand }}" required>
+                        </div>
+                        <div class="col-span-6 sm:col-span-3">
+                            <label for="price"
+                                   class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Price
+                                ($)</label>
+                            <input type="number" name="price" id="price"
+                                   class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                   value="{{ product.price }}" required>
+                        </div>
+                        <div class="col-span-full">
+                            <label for="description"
+                                   class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Product
+                                Details</label>
+                            <textarea id="description" rows="6"
+                                      class="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-sm focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">{{ product.description }}</textarea>
+                        </div>
+                    </div>
+                    <div class="col-span-6 mt-4">
+                        <input {% if product.is_available %}checked{% endif %} id="is_available" type="checkbox"
+                               name="is_available" value="on"
+                               class="m-2 w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                        <label for="is_available" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Is
+                            this
+                            product available?</label>
+                    </div>
+                    <div class="flex my-4 space-x-5">
+                        <div>
+                            <img src="/images/products/apple-imac-1.png" class="h-24" alt="imac image">
+                            <a href="#" class="cursor-pointer">
+                                <svg class="w-6 h-6 -mt-5 text-red-600" fill="currentColor" viewBox="0 0 20 20"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                          d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
+                                          clip-rule="evenodd"></path>
+                                </svg>
+                            </a>
+                        </div>
+                        <div>
+                            <img src="/images/products/apple-imac-2.png" class="h-24" alt="imac image">
+                            <a href="#" class="cursor-pointer">
+                                <svg class="w-6 h-6 -mt-5 text-red-600" fill="currentColor" viewBox="0 0 20 20"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                          d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
+                                          clip-rule="evenodd"></path>
+                                </svg>
+                            </a>
+                        </div>
+                        <div>
+                            <img src="/images/products/apple-imac-3.png" class="h-24" alt="imac image">
+                            <a href="#" class="cursor-pointer">
+                                <svg class="w-6 h-6 -mt-5 text-red-600" fill="currentColor" viewBox="0 0 20 20"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                          d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
+                                          clip-rule="evenodd"></path>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-center w-full">
+                        <label for="product_image"
+                               class="flex flex-col w-full h-32 border-2 border-gray-300 border-dashed rounded cursor-pointer hover:bg-gray-50 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-700">
+                            <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                                <svg class="w-10 h-10 text-gray-400" fill="none" stroke="currentColor"
+                                     viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                          d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path>
+                                </svg>
+                                <p class="py-1 text-sm text-gray-600 dark:text-gray-500">Upload a file or drag
+                                    and drop</p>
+                                <p class="text-xs text-gray-500 dark:text-gray-400">PNG, JPG, GIF up to 10MB</p>
+                            </div>
+                            <input name="product_image" id="product_image" type="file" class="hidden"/>
+                        </label>
+                    </div>
+                    <div class="mt-4">
+                        <button class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                                type="submit">Add product
+                        </button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
