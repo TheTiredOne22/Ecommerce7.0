@@ -24,7 +24,7 @@ SECRET_KEY = '5-1-6z_+%g05)thbkh@eoy)ei0qb@zegcbx#!y04)-3^wajv^e'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['.vercel.app']
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -165,7 +165,7 @@ environ.Env.read_env()
 
 # deployment settings
 SECURE_HSTS_SECONDS = 31536000
-SECURE_SSL_REDIRECT = False
+SECURE_SSL_REDIRECT = True
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
