@@ -6,6 +6,7 @@
     <script src="/static/js/sidebar.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.1/dist/cdn.min.js"></script>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.css" rel="stylesheet"/>
 
 
@@ -28,6 +29,9 @@
 
 
 
+
+
+
     </script>
 
 </head>
@@ -38,6 +42,9 @@
     document.body.addEventListener('htmx:configRequest', (event) => {
     event.detail.headers['X-CSRFToken'] = '{{ csrf_token }}';
 })
+
+
+
 
 
 
@@ -115,6 +122,9 @@ themeToggleBtn.addEventListener('click', function() {
     }
 
 });
+
+
+
 
 
 

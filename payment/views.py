@@ -12,11 +12,10 @@ from django.views.decorators.http import require_POST
 import environ
 import requests
 
-# from order.models import Order
-# from order.tasks import order_created
+from orders.models import Order
+from payment.tasks import payment_completed
 
 # Initialize environment variables
-from orders.models import Order
 
 env = environ.Env()
 environ.Env.read_env()
@@ -48,7 +47,8 @@ def process_payment(request):
     user = request.user
     user_id = user.id
     name = f'{order.first_name} {order.last_name}'
-    success_url = 'http://localhost:8000/payment/completed'
+
+    success_url = request.build_absolute_uri(reverse('payment:completed'))
 
     # Set up authentication and headers
     auth_token = env('SECRET_KEY')
@@ -122,67 +122,21 @@ def payment_cancelled(request):
     return render(request, 'payment/cancelled.html')
 
 
-@csrf_exempt
 @require_POST
+@csrf_exempt
 def webhook(request):
-    """
-    Handle incoming webhooks.
-
-    Verify the webhook signature and process events.
-
-    Args:
-        request: The HTTP request object.
-
-    Returns:
-        An HTTP response indicating success or failure.
-    """
-    try:
-        data = json.loads(request.body.decode('utf-8'))
-    except json.JSONDecodeError:
-        # Return a JSON response for invalid JSON payload
-        return JsonResponse({'error': 'Invalid JSON payload'}, status=400)
-
-        # Retrieve the secret hash from environment variables
-    secret_hash = env('SECRET_HASH')  # Replace with your secret key retrieval
-
-    # Retrieve the signature from the request headers
+    secret_hash = env('SECRET_HASH')
     signature = request.META.get('HTTP_VERIF-HASH')
+    if signature is None or (signature != secret_hash):
+        # This request isn't from Flutterwave; discard
+        return HttpResponse(status=401)
+    payload = request.body
+    payload_data = json.loads(payload)
+    if payload_data.get('event') == 'charge.completed' and payload_data['data']['status'] == 'successful':
+        order_id = payload_data['data']['id']
+        order = get_object_or_404(Order, id=order_id)
 
-    # Verify the request's signature with the secret hash
-    if not signature or not constant_time_compare(signature, secret_hash):
-        # Return an unauthorized response
-        return JsonResponse({'error': 'Unauthorized'}, status=401)
-
-    # Extract event type and status from the payload
-    event_type = data.get('event')
-    status = data.get('data', {}).get('status')
-
-    # Check if the event is 'charge.completed' and the status is 'successful'
-    if event_type == 'charge.completed' and status == 'successful':
-        order_number = data.get('tx_ref')  # Unique transaction reference
-
-        try:
-            # Find the order based on the order number (assuming it's unique)
-            order = Order.objects.get(order_number=order_number)
-
-            # Check if the amount in the payload matches the order amount
-            if order.amount == data.get('data', {}).get('amount'):
-                # Mark the order as paid
-                order.paid = True
-                order.save()
-
-                # Asynchronously trigger the 'payment_completed' task with the order number
-                payment_completed.delay(order_number)
-
-                # Return a success response
-                return HttpResponse({'message': 'Payment processed successfully'})
-            else:
-                logger.error('Amount mismatch for order %s', order.id)
-                # Return a response for amount mismatch
-                return HttpResponse({'error': 'Amount mismatch'}, status=400)
-        except Order.DoesNotExist:
-            # Return a response for order not found
-            return HttpResponse({'error': 'Order not found'}, status=400)
-
-    # Return a response for a received and processed webhook
-    return HttpResponse({'message': 'Webhook received and processed'}, status=200)
+        order.paid = True
+        order.save()
+        payment_completed.delay(order.id)
+    return HttpResponse(status=200)

@@ -8,6 +8,7 @@ from .forms import OrderCreationForm
 from .models import Order, OrderItem
 from cart.views import get_cart
 from .tasks import order_created
+import weasyprint
 
 
 # from order.tasks import order_created
@@ -72,8 +73,11 @@ def admin_order_detail(request, order_id):
     order = get_object_or_404(Order, id=order_id)
     return render(request, 'admin/orders/order/detail.html', {'order': order})
 
-
-@staff_member_required
-def admin_order_pdf(request, order_id):
-    # Get the data to be displayed in the PDF
-    order = get_object_or_404(Order, id=order_id)
+# @staff_member_required
+# def admin_order_pdf(request, order_id):
+#     # Get the data to be displayed in the PDF
+#     order = get_object_or_404(Order, id=order_id)
+#     html = render_to_string('orders/pdf.html', {'order': order})
+#     response = HttpResponse(content_type='application/pdf')
+#     response['content_disposition'] = f'filename=order_{order.id}.pdf'
+#     weasyprint.HTML(string=html).write_pdf(response, stylesheets=[weasyprint.CSS])
